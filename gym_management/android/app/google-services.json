@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220599280371",
+    "project_id": "gymmanagement-b7c9a",
+    "storage_bucket": "gymmanagement-b7c9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220599280371:android:91b0fef51d6000798acd86",
+        "android_client_info": {
+          "package_name": "com.SK18.fitnessHub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220599280371-q964cpo1us9b6drbbbp0mfe1vchqbrsk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAphLKPG84GweRBMEc3ZO7fEzfxchlEdmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220599280371-q964cpo1us9b6drbbbp0mfe1vchqbrsk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
