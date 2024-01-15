@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:io';
 
@@ -35,46 +33,44 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    //GlobalMaterialLocalizations.delegate,
-    //  MonthYearPickerLocalizations.delegate,
-  localizationsDelegates:const [ MonthYearPickerLocalizations.delegate],
-      title: 'Gym Management',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home:FutureBuilder(future: checkLogin(), builder: (BuildContext context, AsyncSnapshot snapshot) {
-        // if(!snapshot.hasData)
-        // return Login();
-        // else
-         return MyHomePage(title: "Gym");
-        
-      })
+        //GlobalMaterialLocalizations.delegate,
+        //  MonthYearPickerLocalizations.delegate,
+        localizationsDelegates: const [MonthYearPickerLocalizations.delegate],
+        title: 'Gym Management',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: FutureBuilder(
+            future: checkLogin(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              // if(!snapshot.hasData)
+              // return Login();
+              // else
+              return MyHomePage(title: "Gym");
+            })
 
-     
-      //MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-
-  
+        //MyHomePage(title: 'Flutter Demo Home Page'),
+        );
   }
-   Future<bool> checkLogin()async {
-   //t("Server address " +Services.BASE_URL);
+
+  Future<bool> checkLogin() async {
+    //t("Server address " +Services.BASE_URL);
     return await true;
-   }
-    
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -96,8 +92,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-    int _counter = 0;
-    int _selectedIndex =0;
+  int _counter = 0;
+  int _selectedIndex = 0;
 
 //   @override
 //   void initState() {
@@ -105,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //   super.initState();
 
 //  //http://192.168.29.253:8089
-     
+
 //   }
   void _incrementCounter() {
     setState(() {
@@ -117,49 +113,64 @@ class _MyHomePageState extends State<MyHomePage> {
       //_counter++;
     });
   }
-  
-  
-  static List<Widget> _widgetOptions = <Widget>[Home(),Attandance(),Expendure(),Profile()];
+
+  static List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    Attandance(),
+    Expendure(),
+    Profile()
+  ];
   @override
   Widget build(BuildContext context) {
-        double unitwidth = MediaQuery.of(context).size.width / 100;
+    double unitwidth = MediaQuery.of(context).size.width / 100;
     double unitheight = MediaQuery.of(context).size.height / 100;
-    
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(resizeToAvoidBottomInset: true,
-    
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+
       appBar: AppBar(
-        
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         actions: [
-          if(_selectedIndex == 0)
-           Row(children: [
-            IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: ((context) => MonthlyTransaction())));
-          }, icon: const Icon(Icons.receipt)),
-          IconButton(onPressed: ()async{
-             global.allUser = await Services().getAllUser();
-           showSearch(context: context, delegate: Search());
-          }, icon: const Icon(Icons.search)),
-          ],),
-          
-          if(_selectedIndex == 3)
-          IconButton(onPressed: (){
-            
-            Navigator.push(context, MaterialPageRoute(builder: ((context) => Address())));
-          }, icon: const Icon(FontAwesomeIcons.server))
-         
+          if (_selectedIndex == 0)
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => MonthlyTransaction())));
+                    },
+                    icon: const Icon(Icons.receipt)),
+                IconButton(
+                    onPressed: () async {
+                      global.allUser = await Services().getAllUser();
+                      showSearch(context: context, delegate: Search());
+                    },
+                    icon: const Icon(Icons.search)),
+              ],
+            ),
+          if (_selectedIndex == 3)
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => Address())));
+                },
+                icon: const Icon(FontAwesomeIcons.server))
         ],
       ),
       //here we use future builder for authentication
-      body: Container(child: _widgetOptions.elementAt(_selectedIndex),),
+      body: Container(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       // Center(
       //   // Center is a layout widget. It takes a single child and positions it
       //   // in the middle of the parent.
@@ -190,76 +201,71 @@ class _MyHomePageState extends State<MyHomePage> {
       //     ],
       //   ),
       // ),
-      
-      floatingActionButton:(_selectedIndex == 0 ||_selectedIndex == 2)? FloatingActionButton(
-        onPressed: (){
-          
-        if(_selectedIndex == 0){
-         Navigator.push(context, MaterialPageRoute(builder: ((context) => CreateUser())));
-        }
-        if(_selectedIndex == 2){
-         // await Services().gettestUserData();
-          Navigator.push(context, MaterialPageRoute(builder: ((context) => AddExpenses())));
-        }
-        
-         
-        },
-        
-        child: (_selectedIndex == 1)?Icon(Icons.check): Icon(Icons.add),
-      ):null,
-      
+
+      floatingActionButton: (_selectedIndex == 0 || _selectedIndex == 2)
+          ? FloatingActionButton(
+              onPressed: () {
+                if (_selectedIndex == 0) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => CreateUser())));
+                }
+                if (_selectedIndex == 2) {
+                  // await Services().gettestUserData();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => AddExpenses())));
+                }
+              },
+              child:
+                  (_selectedIndex == 1) ? Icon(Icons.check) : Icon(Icons.add),
+            )
+          : null,
+
       bottomNavigationBar: SizedBox(
-                 
-                     height: unitheight *8,
-                    
-                  child: Column(
-                      //alignment: AlignmentDirectional.bottomEnd,
-                      children: [
-                     
-                        Container(
-                            height: unitheight * 8,
-                            child: BottomNavigationBar(
-                              type: BottomNavigationBarType.fixed,
-                              items: const <BottomNavigationBarItem>[
-                                BottomNavigationBarItem(
-                                  icon: Icon(Icons.home),
-                                  label: 'Home',
-                                  //title: Text()
-                                ),
-                                
-                                  BottomNavigationBarItem(
-                                    icon: Icon(Icons.calendar_today),
-                                    label: 'Attandace',
-                                  ),
-                                BottomNavigationBarItem(
-                                  icon: Icon(FontAwesomeIcons.cashRegister),
-                                  label: 'Expendure',
-                                ),
-                                BottomNavigationBarItem(
-                                  icon: Icon(Icons.person),
-                                  label: 'Profile',
-                                ),
-                              ],
-                              showUnselectedLabels: true,
-                              unselectedItemColor: Colors.grey,
-                              unselectedLabelStyle:
-                                  TextStyle(color: Colors.grey),
-                              currentIndex: _selectedIndex,
-                              selectedItemColor: Colors.grey[900],
-                              onTap: _onItemTapped,
-                            )),
-                      ])), // This trailing comma makes auto-formatting nicer for build methods.
+          height: unitheight * 8,
+          child: Column(
+              //alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                Container(
+                    height: unitheight * 8,
+                    child: BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      items: const <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.home),
+                          label: 'Home',
+                          //title: Text()
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.calendar_today),
+                          label: 'Attandace',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(FontAwesomeIcons.cashRegister),
+                          label: 'Expendure',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.person),
+                          label: 'Profile',
+                        ),
+                      ],
+                      showUnselectedLabels: true,
+                      unselectedItemColor: Colors.grey,
+                      unselectedLabelStyle: TextStyle(color: Colors.grey),
+                      currentIndex: _selectedIndex,
+                      selectedItemColor: Colors.grey[900],
+                      onTap: _onItemTapped,
+                    )),
+              ])), // This trailing comma makes auto-formatting nicer for build methods.
     );
-    
   }
-    void _onItemTapped(int index) async{
-      //print("Test date "+ DateTime.now().toIso8601String());
+
+  void _onItemTapped(int index) async {
+    //print("Test date "+ DateTime.now().toIso8601String());
     setState(() {
-      
       getConnectivity();
       _selectedIndex = index;
     });
-    
+
     //var data = await Services().gettestUserData();
     //print("object "+data.toString());
 //     final connectivityResult = await (Connectivity().checkConnectivity());
@@ -274,16 +280,15 @@ class _MyHomePageState extends State<MyHomePage> {
 //     print("Internet not connected");
 // }
   }
-  getConnectivity(){
+
+  getConnectivity() {
     StreamSubscription subscription;
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async{
-     var isDeviceConnected = await InternetConnectionChecker().hasConnection;
-     if(!isDeviceConnected){
-      print("Not Connected");
-     }else{
- print("Connected");
-      
-     }
-     });
+    subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) async {
+      var isDeviceConnected = await InternetConnectionChecker().hasConnection;
+      if (!isDeviceConnected) {
+      } else {}
+    });
   }
 }
