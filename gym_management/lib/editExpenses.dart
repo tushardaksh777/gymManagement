@@ -488,7 +488,6 @@ class _EditExpensesState extends State<EditExpenses> {
           exp, payment, date, expCategory);
     } else {
       AchievementView(
-        context,
         title: "Add Expenses",
         subTitle: "Please Enter all Requird Details",
         icon: Icon(
@@ -499,7 +498,7 @@ class _EditExpensesState extends State<EditExpenses> {
         alignment: Alignment.bottomCenter,
         duration: Duration(seconds: 2),
         isCircle: true,
-      )..show();
+      )..show(context);
     }
   }
 

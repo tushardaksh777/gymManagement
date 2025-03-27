@@ -1519,7 +1519,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: unitwidth * 30,
+                              width: unitwidth * 32,
                               height: unitheight * 5,
                               alignment: Alignment.center,
                               child: Row(
@@ -1709,7 +1709,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: unitwidth * 30,
+                              width: unitwidth * 32,
                               height: unitheight * 5,
                               alignment: Alignment.center,
                               child: Row(
@@ -1974,7 +1974,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: unitwidth * 30,
+                              width: unitwidth * 32,
                               height: unitheight * 5,
                               alignment: Alignment.center,
                               child: Row(
@@ -2137,7 +2137,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: unitwidth * 30,
+                              width: unitwidth * 32,
                               height: unitheight * 5,
                               alignment: Alignment.center,
                               child: Row(
@@ -2409,6 +2409,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
     //   return aDT.compareTo(bDT);
     //  });
+    print("Profit Loss " + data.toString());
     var p = await getProfile();
     File pdffile = await PdfApis.profitandlossPdf(
         data, profitandlossDateTime, pdf.yearly, p);

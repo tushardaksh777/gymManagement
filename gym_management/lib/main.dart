@@ -21,11 +21,12 @@ import 'package:gym_management/attandance.dart';
 import 'package:gym_management/globalData.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
   // ByteData data = await PlatformAssetBundle().load('assets/certificate/lets-encrypt-r3.pem');
   // SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
   runApp(const MyApp());
@@ -69,6 +70,20 @@ class MyApp extends StatelessWidget {
 
   Future<bool> checkLogin() async {
     //t("Server address " +Services.BASE_URL);
+    var status = await Permission.storage.status;
+    PermissionStatus? req;
+    if (status.isDenied) {
+      req = await Permission.storage.request();
+    }
+
+    if (status.isPermanentlyDenied) {
+      req = await Permission.storage.request();
+    }
+    if (req!.isDenied) {
+      print(req.toString());
+    } else {
+      print("Else " + req.toString());
+    }
     return await true;
   }
 }
@@ -161,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (_selectedIndex == 3)
             IconButton(
                 onPressed: () {
+                  askForPermission();
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) => Address())));
                 },
@@ -285,10 +301,27 @@ class _MyHomePageState extends State<MyHomePage> {
     StreamSubscription subscription;
     subscription = Connectivity()
         .onConnectivityChanged
-        .listen((ConnectivityResult result) async {
+        .listen((List<ConnectivityResult> result) async {
       var isDeviceConnected = await InternetConnectionChecker().hasConnection;
       if (!isDeviceConnected) {
       } else {}
     });
+  }
+
+  askForPermission() async {
+    var status = await Permission.storage.status;
+    PermissionStatus req = status;
+    if (status.isDenied) {
+      req = await Permission.storage.request();
+    }
+
+    if (status.isPermanentlyDenied) {
+      req = await Permission.storage.request();
+    }
+    if (req!.isDenied) {
+      print(req.toString());
+    } else {
+      print("Else " + req.toString());
+    }
   }
 }

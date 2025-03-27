@@ -742,7 +742,7 @@ class _UserViewState extends State<UserView> with TickerProviderStateMixin {
       });
 
       // ignore: use_build_context_synchronously
-      AchievementView(context,
+      AchievementView(
               title: (u == value.active) ? "Active User" : "Inactive User",
               subTitle: (u == value.active)
                   ? "User Activated Successfully"
@@ -761,7 +761,7 @@ class _UserViewState extends State<UserView> with TickerProviderStateMixin {
               duration: const Duration(seconds: 2),
               isCircle: true,
               listener: ((p0) {}))
-          .show();
+          .show(context);
     } else {
       waitingForStatusResponse = false;
       Fluttertoast.showToast(msg: "Please try Again");
@@ -1123,7 +1123,6 @@ class _UserViewState extends State<UserView> with TickerProviderStateMixin {
           //if(i > 0 && _eventList[i-1].startTime != DateTime.parse(a[i]["date"])){
           _eventList.add(e);
           //}
-
         } else {
           e = NeatCleanCalendarEvent('',
               startTime: DateTime.parse(a[i]["date"]),
@@ -1133,7 +1132,6 @@ class _UserViewState extends State<UserView> with TickerProviderStateMixin {
           //if(i > 0 && _eventList[i-1].startTime != DateTime.parse(a[i]["date"])){
           _eventList.add(e);
           //}
-
         }
       }
     }

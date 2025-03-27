@@ -8,7 +8,8 @@ import 'package:gym_management/DTO/User.dart';
 import 'package:gym_management/globalData.dart';
 import 'package:in_date_utils/in_date_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:open_file/open_file.dart';
+//import 'package:open_file_plus/open_file_plus.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -119,9 +120,9 @@ class PdfApis {
   }
 
   static Future openFile(File file) async {
-    final url = file.path;
-
-    await OpenFile.open(url);
+    String url = file.path;
+    print(url);
+    await OpenFilex.open(url);
   }
 
   static List<Page> userPage(List<UserModel> user, var p) {
@@ -1189,7 +1190,6 @@ class PdfApis {
         s.add(val);
 
         //monthlyfee = int.parse(list[i]["amount"].toString());
-
       }
 
       // /print("Month "+month.toString());
